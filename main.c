@@ -1,6 +1,40 @@
 #include <stdio.h>
 #include <malloc.h>
 #define SIZE 10
+#define T char
+#define SiZe 1000
+#define true 1 == 1
+#define false 1 != 1
+
+typedef int boolean;
+int cursor = -1;
+T Stack[SiZe];
+
+boolean pushStack(T data){
+    if(cursor<SiZe){
+        Stack[++cursor] = data;
+        return true;
+    } else{
+        printf("%s \n", "Stack overflow");
+        return false;
+    }
+}
+
+T popStack(){
+    if(cursor != -1){
+        return Stack[cursor--];
+    }else{
+        printf("%s \n", "Stack is empty");
+        return -1;
+    }
+}
+
+void ToBin(int n) {
+    while(n >= 1){
+        pushStack(n % 2);
+        n /= 2;
+    }
+}
 
 typedef struct{
     int pri;
@@ -82,7 +116,7 @@ void printQueue(){
 }
 
 int main() {
-    //lesns9
+    //lesens9
     init();
     ins(7,175);
     ins(10,17);
@@ -104,9 +138,9 @@ int main() {
     ins(2,15);
     printQueue();
 
-
+// lesens10
+// wariant1
 int n;
-
 printf("Enter integer\n");
 scanf("%d",&n);
 while(n)
@@ -114,7 +148,20 @@ while(n)
     printf("%d",n%2);
     n=n/2;
 }
+printf("\n");
+// wariant2
+printf("16: ");
+ToBin(16);
+int count = cursor;
+    for (int i = 0; i <= count; ++i) {
+        printf("%d", popStack());
+    }
 
-
+printf("\n7: ");
+ToBin(7);
+count = cursor;
+    for (int i = 0; i <= count; ++i) {
+        printf("%d", popStack());
+    }
     return 0;
 }
